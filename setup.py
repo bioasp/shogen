@@ -32,18 +32,18 @@ class install(_install):
         _install.run(self)
                          
 setup(cmdclass={'install': install},
-      name='shogen',
-      version='1.3',
-      url='http://pypi.python.org/pypi/shogen/',
+      name='shogen2',
+      version='1.0',
+      url='http://pypi.python.org/pypi/shogen2/',
       license='GPLv3+',
       description='Finding shortest genome segments that regulate metabolic pathways',
       long_description=open('README').read(),
       author='Sven Thiele',
       author_email='sthiele78@gmail.com',
-      packages = ['__shogen__'],
-      package_dir = {'__shogen__' : 'src'},
-      package_data = {'__shogen__' : ['encodings/*.lp']},
-      scripts = ['shogen.py'],
+      packages = ['__shogen2__'],
+      package_dir = {'__shogen2__' : 'src'},
+      package_data = {'__shogen2__' : ['encodings/*.lp']},
+      scripts = ['shogen2.py'],
       install_requires=[
         "pyasp >= 1.2"
       ]

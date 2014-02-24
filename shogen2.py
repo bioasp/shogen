@@ -18,7 +18,7 @@
 # -*- coding: utf-8 -*-
 import os
 from optparse import OptionParser
-from __shogen__ import query, utils, sbml
+from __shogen2__ import query, utils, sbml
 
 
 if __name__ == '__main__':
@@ -49,40 +49,43 @@ if __name__ == '__main__':
     k = options.k
     length = options.l
 
-    print "read instance files ...",
-    instance, dictg, revdictr, dictr, oldcouples = utils.createInstance(genome_string,metabolism_string,catalysation_string) 
-    print "done."
+    print '\nReading genome from ',genome_string,'...',
+    genome, genedict, revdictg = utils.read_genome(genome_string)
+    print 'done.'
+    #print genome
+    #print genedict
 
-    inst=instance.to_file()
-    instance.to_file("inst.lp")
-    print "create instance ...",
-    ksip_instance = query.get_ksip_instance(inst,length)
-    print "done.",len(ksip_instance)
- 
-    kinst=ksip_instance.to_file()
+    print '\nReading metabolic network from ',metabolism_string,'...',
+    metabolism = sbml.readSBMLnetwork(metabolism_string)
+    print 'done.'
+    #print metabolism
+    
+    print '\nReading catalysation information from ',catalysation_string,'...',
+    catalysis = utils.read_catalysis(catalysation_string, genedict)
+    print 'done.'
+
+    
+    instance=genome.union(metabolism).union(catalysis)
+    inst=instance.to_file("instance.lp")
+    
     
     print "read queries ...", 
-    couples, revdictr = utils.readcouples(couple_string, dictr, revdictr)
+    couples = utils.readcouples(couple_string)
     print "done.", len(couples)
-        
+    
+    couples.to_file("couples.lp")
+
     print "filter queries ...",    
-    filter_couples = query.filter_couples(couples,kinst)
+    filter_couples = query.filter_couples(couples,inst,length)
     print "done.",len(filter_couples)
-       
+
+    
     new_couples = []
-    for a in filter_couples :
-      new_couples.append([int(a.arg(0)), int(a.arg(1))] )
-      
-    print "create sgs instance ...",
-    sgs_instance = query.get_sgs_instance(inst,length)
-    print "done.",len(sgs_instance)
-    sgs_instance_f = sgs_instance.to_file()
-      
-      
-    for s,g in new_couples: 
-      print "\n"+str(k)+" best gene units catalyzing pathway from reaction",revdictr[s],"to",revdictr[g]
-      query.get_k_sgs(sgs_instance_f, s, g, length, k, dictg, revdictr)
-    os.unlink(sgs_instance_f)
-	    
+    for a in couples :
+      new_couples.append([a.arg(0), a.arg(1)] )
+    
+    for s,e in new_couples: 
+      print "\n"+str(k)+" best gene units catalyzing pathway from reaction",s,"to",e
+      ret = query.get_sgs(inst, s, e, length, k, revdictg)
     os.unlink(inst)
     utils.clean_up()

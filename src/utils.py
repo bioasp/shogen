@@ -35,7 +35,7 @@ def read_genome(genome_string) :
     instance.add(Term('gene', [g])) 
   
   genome_f.close()
-  return instance, dictg
+  return instance, dictg, revdictg
 
 def read_catalysis(catalysation_string, gene_dict) :
     
@@ -54,9 +54,6 @@ def read_catalysis(catalysation_string, gene_dict) :
   return instance
 
   
-
-def createInstance(genome_string,metabolism_string,catalysation_string) :
-
   instance = TermSet()
 
   igenome = open(genome_string, "r")
@@ -128,26 +125,8 @@ def createInstance(genome_string,metabolism_string,catalysation_string) :
   return instance, revdictg, revdictr, dictr, couplestab
 
 
-def readcouples(couple_string, dictr, revdictr) :
 
-  icouples = open(couple_string, "r")
-  bla =  icouples.read().replace('\r\n','\n').splitlines()
-  r = len(revdictr) # Counter to define the matchings between real names and ASP names
-  couples = TermSet()
-  for line in bla :
-    link = line.split()
-    if not dictr.has_key(link[0]) :# Dictionnary for the reactions
-      r+=1
-      dictr[link[0]] = r 
-      revdictr.append(link[0])
-    if not dictr.has_key(link[1]) :
-      r+=1
-      dictr[link[1]] = r
-      revdictr.append(link[1])
-    couples.add(Term('pair', [str(dictr[link[0]]),str(dictr[link[1]])]))
-  return couples, revdictr
-
-def readcouples_new(couple_string) :
+def readcouples(couple_string) :
   couples = TermSet()
   
   couples_f = open(couple_string, "r")
@@ -161,23 +140,6 @@ def readcouples_new(couple_string) :
   return couples
 
 
-def print_reactions(answer,dictr,dictg) :
-  for a in answer:
-    if a.pred() == "fedge" :
-      print "\n   ",dictr[int(a.arg(0).arg(1))]+"("+dictg[int(a.arg(0).arg(0))]+")",
-      print"->",
-      print dictr[int(a.arg(1).arg(1))]+"("+dictg[int(a.arg(1).arg(0))]+")",
-      print ": ",a.arg(2),
-  print
-
-  
-def print_genes(answer, dictg) :
-  for a in answer:
-    if a.pred() == "cgene" :
-      print dictg[int(a.arg(0))],
-    if a.pred() == "ugene" :
-      print dictg[int(a.arg(0))],
-  print
   
    
   
