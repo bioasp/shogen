@@ -33,7 +33,7 @@ class install(_install):
                          
 setup(cmdclass={'install': install},
       name='shogen',
-      version='1.3',
+      version='1.4dev',
       url='http://pypi.python.org/pypi/shogen/',
       license='GPLv3+',
       description='Finding shortest genome segments that regulate metabolic pathways',
