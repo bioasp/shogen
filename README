@@ -28,7 +28,7 @@ Samples
 Sample files for finding functional gene units in e. coli are available here:
       genome.txt_ metabolism.sbml_ catalyze.txt_ queries.txt_
 
-.. _genome.txt: http://www.cs.uni-potsdam.de/~sthiele/bioasp/downloads/samples/ecoli_K12data/genome.txt
-.. _metabolism.sbml: http://www.cs.uni-potsdam.de/~sthiele/bioasp/downloads/samples/ecoli_K12data/metabolism.sbml
-.. _catalyze.txt: http://www.cs.uni-potsdam.de/~sthiele/bioasp/downloads/samples/ecoli_K12data/catalyze.txt
-.. _queries.txt: http://www.cs.uni-potsdam.de/~sthiele/bioasp/downloads/samples/ecoli_K12data/queries.txt
+.. _genome.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt
+.. _metabolism.sbml: http://bioasp.github.io/downloads/samples/ecoli_K12data/metabolism.sbml
+.. _catalyze.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/catalyze.txt
+.. _queries.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/queries.txt
