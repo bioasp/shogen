@@ -79,7 +79,7 @@ def bla(instance, s, e, pmax, k, dictg):
     
     #goptions='--const min=0'
     goptions=''
-    coptions='--opt-heu --opt-hier --heu=vsids --quiet=1,1'
+    coptions='--opt-heu --opt-strategy=1--heu=vsids --quiet=1,1'
     solver = GringoClaspOpt(gringo_options=goptions,clasp_options=coptions)
     models = solver.run(prg, nmodels=0, collapseTerms=True, collapseAtoms=True)
     os.unlink(details_f)
@@ -143,7 +143,7 @@ def get_k_sgs(instance, start, end, pmax, k, dictg, revdictr):
     while count < k : 
       prg = [length_prg , instance, details_f ]
       goptions=' --const pmin='+str(min)
-      coptions='--opt-heu --opt-hier --heu=vsids'
+      coptions='--opt-heu --opt-strategy=1 --heu=vsids'
       #coptions='--opt-heu --heu=vsids'
       solver = GringoClaspOpt(gringo_options=goptions,clasp_options=coptions)
       #solver = GringoUnClasp(gringo_options=goptions,clasp_options=coptions)
@@ -161,7 +161,7 @@ def get_k_sgs(instance, start, end, pmax, k, dictg, revdictr):
 	
 	prg = [length_prg , instance, details_f, exclude_sol([optima[0]]) ]
 	goptions='--const pmin='+str(min)
-	coptions='--opt-heu --opt-hier --opt-all='+str(min)
+	coptions='--opt-heu --opt-strategy=1 --opt-mode=optN'
 	solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
 	#print "search2 ...",
 	sols = solver.run(prg,collapseTerms=True,collapseAtoms=False)  
