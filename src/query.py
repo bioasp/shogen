@@ -66,9 +66,9 @@ def get_sgs(instance, s, e, pmax, k, dictg):
     while count < k : 
       prg = [sgs_prg, instance, details_f ]
       goptions=' --const pmin='+str(min)
-      coptions='--opt-heu --opt-hier --heu=vsids'
+      coptions='--opt-heu --opt-strategy=1 --heu=vsids'
       #coptions='--opt-heu --heu=vsids'
-      solver = GringoClaspOpt(gringo_options=goptions,clasp_options=coptions)
+      solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
       #solver = GringoUnClasp(gringo_options=goptions,clasp_options=coptions)
       #print "search1 ...",
       optima = solver.run(prg, collapseTerms=True, collapseAtoms=False)
@@ -80,7 +80,7 @@ def get_sgs(instance, s, e, pmax, k, dictg):
 	
 	prg = [sgs_prg , instance, details_f, exclude_sol([optima[0]]) ]
 	goptions='--const pmin='+str(min)
-	coptions='--opt-heu --opt-hier --opt-all='+str(min)
+	coptions='--opt-heu --opt-strategy=1 --opt-mode=optN'
 	solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
 	#print "search2 ...",
 	#num = solver.run_print(prg,geneprinter,0)  

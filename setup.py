@@ -33,7 +33,7 @@ class install(_install):
                          
 setup(cmdclass={'install': install},
       name='shogen2',
-      version='1.0',
+      version='1.1',
       url='http://pypi.python.org/pypi/shogen2/',
       license='GPLv3+',
       description='Finding shortest genome segments that regulate metabolic pathways',
@@ -45,6 +45,6 @@ setup(cmdclass={'install': install},
       package_data = {'__shogen2__' : ['encodings/*.lp']},
       scripts = ['shogen2.py'],
       install_requires=[
-        "pyasp >= 1.2"
+        "pyasp >= 1.3"
       ]
 )
