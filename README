@@ -1,7 +1,5 @@
-
 Installation
 ============
-
 
 You can install shogen by running::
 
@@ -20,10 +18,11 @@ Typical usage is::
 	  -k K, --k=K  Number of ranked  shortest genome segments (Default to 5)
 	  -l L, --l=L  maximum length of a genome segment (Default to 200)
 
+ 
 Samples
 =======
 
-Sample files for finding functional gene units in e. coli are available here:
+Sample files for finding functional gene units in e. coli are available here::
       genome.txt_ metabolism.sbml_ catalyze.txt_ queries.txt_
 
 .. _genome.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt
