@@ -25,7 +25,7 @@ Typical usage is::
 Samples
 =======
 
-Sample files for finding functional gene units in e. coli are available here:
+Sample files for finding functional gene units in e. coli are available here::
       genome.txt_ metabolism.sbml_ catalyze.txt_ queries.txt_
 
 .. _genome.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt

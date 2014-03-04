@@ -66,14 +66,13 @@ if __name__ == '__main__':
 
     
     instance=genome.union(metabolism).union(catalysis)
-    inst=instance.to_file("instance.lp")
+    inst=instance.to_file()
     
     
     print "read queries ...", 
     couples = utils.readcouples(couple_string)
     print "done.", len(couples)
     
-    couples.to_file("couples.lp")
 
     print "filter queries ...",    
     filter_couples = query.filter_couples(couples,inst,length)

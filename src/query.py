@@ -27,8 +27,6 @@ root = __file__.rsplit('/', 1)[0]
 filter_prg =      root + '/encodings/filter_couples.lp'
 sgs_prg =    root + '/encodings/sgs.lp'
 
-
-
     
 class GenePrinter:
   def __init__(self,dictg):
@@ -51,13 +49,14 @@ def filter_couples(couple_facts, instance, pmax):
     os.unlink(prg[2])
     return models[0]
   
+
 def get_sgs(instance, s, e, pmax, k, dictg): 
  # grounding is the problem (takes long)
     startfact = String2TermSet('start('+str(s)+')')
     goalfact = String2TermSet('end('+str(e)+')')
     pmaxfact = String2TermSet('pmax('+str(pmax)+')')
     details = startfact.union(goalfact).union(pmaxfact)
-    details_f = details.to_file("details.lp")
+    details_f = details.to_file()
    
     count=0
     min=1

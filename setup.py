@@ -45,6 +45,6 @@ setup(cmdclass={'install': install},
       package_data = {'__shogen2__' : ['encodings/*.lp']},
       scripts = ['shogen2.py'],
       install_requires=[
-        "pyasp >= 1.3"
+        "pyasp == 1.3"
       ]
 )
