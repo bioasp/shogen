@@ -23,12 +23,9 @@ root = __file__.rsplit('/', 1)[0]
 
 prepro_prg =      root + '/encodings/preprocess.lp'
 length_prg =    root + '/encodings/sgs.lp'
-
 convert_prg =   root + '/encodings/convert.lp'
 convert_sds_prg =   root + '/encodings/convert_sds.lp'
-ksip_prg =      root + '/encodings/ksip.lp'
 filter_prg =      root + '/encodings/filter_couples.lp'
-filter2_prg =      root + '/encodings/filter2_couples.lp'
 
 
 class ASPrinter:
@@ -47,6 +44,7 @@ class EdgePrinter:
       if t.pred() == "zwoop" :
 	print "zwoop("+self.dictg[int(t.arg(0).arg(0))]+","+self.revdictr[int(t.arg(0).arg(1))]+")->("+self.dictg[int(t.arg(1).arg(0))]+","+self.revdictr[int(t.arg(1).arg(1))]+")",
     print " "
+
     
 class GenePrinter:
   def __init__(self,dictg,revdictr):
@@ -60,6 +58,7 @@ class GenePrinter:
       else:
 	print t  
     print " "
+
     
 def filter_couples(couple_facts, instance):
     prg = [filter_prg, instance, couple_facts.to_file()]
@@ -68,24 +67,7 @@ def filter_couples(couple_facts, instance):
     os.unlink(prg[2])
     return models[0]
   
-def bla(instance, s, e, pmax, k, dictg):
-    startfact = String2TermSet('start('+str(s)+')')
-    goalfact = String2TermSet('goal('+str(e)+')')
-    pmaxfact = String2TermSet('pmax('+str(pmax)+')')
-    details = startfact.union(goalfact).union(pmaxfact)
-    details_f = details.to_file("details.lp")
-    
-    prg = [filter2_prg, instance, details_f]
-    
-    #goptions='--const min=0'
-    goptions=''
-    coptions='--opt-heu --opt-strategy=1--heu=vsids --quiet=1,1'
-    solver = GringoClaspOpt(gringo_options=goptions,clasp_options=coptions)
-    models = solver.run(prg, nmodels=0, collapseTerms=True, collapseAtoms=True)
-    os.unlink(details_f)
-    return models 
-     
- 
+   
 def get_ksip_instance(instance, pmax):
 
     pmaxfact = String2TermSet('pmax('+str(pmax)+')')
@@ -97,7 +79,8 @@ def get_ksip_instance(instance, pmax):
     solution = solver.run(prg,1,collapseTerms=False, collapseAtoms=False)
     os.unlink(inst)
     return solution[0] 
-  
+
+    
 def get_sgs_instance(instance, pmax):
 
     pmaxfact = String2TermSet('pmax('+str(pmax)+')')
@@ -145,10 +128,10 @@ def get_k_sgs(instance, start, end, pmax, k, dictg, revdictr):
       goptions=' --const pmin='+str(min)
       coptions='--opt-heu --opt-strategy=1 --heu=vsids'
       #coptions='--opt-heu --heu=vsids'
-      solver = GringoClaspOpt(gringo_options=goptions,clasp_options=coptions)
+      solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
       #solver = GringoUnClasp(gringo_options=goptions,clasp_options=coptions)
       #print "search1 ...",
-      optima = solver.run(prg,collapseTerms=True,collapseAtoms=False)
+      optima = solver.run(prg,nmodels=0,collapseTerms=True,collapseAtoms=False)
    
       
       if len(optima) :
