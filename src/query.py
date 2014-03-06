@@ -21,9 +21,6 @@ from pyasp.asp import *
 
 root = __file__.rsplit('/', 1)[0]
 
-
-
-
 filter_prg =      root + '/encodings/filter_couples.lp'
 sgs_prg =    root + '/encodings/sgs.lp'
 
@@ -45,7 +42,7 @@ class GenePrinter:
 def filter_couples(couple_facts, instance, pmax):
     prg = [filter_prg, instance, couple_facts.to_file()]
     solver = GringoClasp()
-    models = solver.run(prg,nmodels=0,collapseTerms=True, collapseAtoms=False)
+    models = solver.run(prg,collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[2])
     return models[0]
   
@@ -79,11 +76,11 @@ def get_sgs(instance, s, e, pmax, k, dictg):
 	
 	prg = [sgs_prg , instance, details_f, exclude_sol([optima[0]]) ]
 	goptions='--const pmin='+str(min)
-	coptions='--opt-heu --opt-strategy=1 --opt-mode=optN'
+	coptions='--opt-heu --opt-strategy=1 --opt-mode=optN --opt-bound='+str(min)
 	solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
 	#print "search2 ...",
 	#num = solver.run_print(prg,geneprinter,0)  
-        solutions = solver.run(prg,0, collapseTerms=True, collapseAtoms=False)
+        solutions = solver.run(prg, collapseTerms=True, collapseAtoms=False)
         for i in solutions :
 	  count += 1
 	  geneprinter.write(count,i)
