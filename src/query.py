@@ -63,7 +63,7 @@ class GenePrinter:
 def filter_couples(couple_facts, instance):
     prg = [filter_prg, instance, couple_facts.to_file()]
     solver = GringoClasp()
-    models = solver.run(prg,nmodels=0,collapseTerms=True, collapseAtoms=False)
+    models = solver.run(prg,collapseTerms=True, collapseAtoms=False)
     os.unlink(prg[2])
     return models[0]
   
@@ -76,7 +76,7 @@ def get_ksip_instance(instance, pmax):
     prg = [convert_prg , instance, inst ]
 
     solver = GringoClasp()
-    solution = solver.run(prg,1,collapseTerms=False, collapseAtoms=False)
+    solution = solver.run(prg,collapseTerms=False, collapseAtoms=False)
     os.unlink(inst)
     return solution[0] 
 
@@ -89,7 +89,7 @@ def get_sgs_instance(instance, pmax):
     prg = [convert_sds_prg , instance, inst ]
 
     solver = GringoClasp()
-    solution = solver.run(prg,1,collapseTerms=False, collapseAtoms=False)
+    solution = solver.run(prg,collapseTerms=False, collapseAtoms=False)
     os.unlink(inst)
     return solution[0] 
   
@@ -100,7 +100,7 @@ def preprocess(instance, start, goal, pmax):
     pmaxfact = String2TermSet('pmax('+str(pmax)+')')
     details = startfact.union(goalfact).union(pmaxfact)
     details_f = details.to_file() 
-    prg = [prepro_prg , instance, details_f ]
+    prg = [prepro_prg, instance, details_f ]
 
     solver = GringoClasp()
     solution = solver.run(prg,1)
@@ -126,12 +126,12 @@ def get_k_sgs(instance, start, end, pmax, k, dictg, revdictr):
     while count < k : 
       prg = [length_prg , instance, details_f ]
       goptions=' --const pmin='+str(min)
-      coptions='--opt-heu --opt-strategy=1 --heu=vsids'
+      coptions='--opt-heu --opt-strategy=1 --heu=vsids '
       #coptions='--opt-heu --heu=vsids'
       solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
       #solver = GringoUnClasp(gringo_options=goptions,clasp_options=coptions)
       #print "search1 ...",
-      optima = solver.run(prg,nmodels=0,collapseTerms=True,collapseAtoms=False)
+      optima = solver.run(prg,collapseTerms=True,collapseAtoms=False)
    
       
       if len(optima) :
@@ -144,7 +144,7 @@ def get_k_sgs(instance, start, end, pmax, k, dictg, revdictr):
 	
 	prg = [length_prg , instance, details_f, exclude_sol([optima[0]]) ]
 	goptions='--const pmin='+str(min)
-	coptions='--opt-heu --opt-strategy=1 --opt-mode=optN'
+	coptions='--opt-heu --opt-strategy=1 --opt-mode=optN --opt-bound='+str(min)
 	solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
 	#print "search2 ...",
 	sols = solver.run(prg,collapseTerms=True,collapseAtoms=False)  
