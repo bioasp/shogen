@@ -33,14 +33,10 @@
 
 <p>Integrating heterogeneous knowledge is necessary to elucidate the regulations in biological systems. In particular, such an integration is widely used to identify functional units, that are sets of genes that can be triggered by the same external stimuli, as biological stresses, and that are linked to similar responses of the system. Although several models and algorithms shown great success for detecting functional units on well-known biological species, they fail in identifying them when applied to more exotic species, such as extremophiles, that are by nature unrefined. Shortest Genome Segments (SGS) is a new model of functional units with a predictive power that is comparable to existing methods but overcomes this crucial limitation. In contrary to existing methods, SGS are stable in (i) computational time and (ii) ability to predict functional units when one deteriorates the biological knowledge, which simulates cases that occur for exotic species. </p>
 
-<p><strong>Related publications:</strong></p>
-
-<p>An ASP application in integrative biology: identification of functional gene units. (2013). 12th International Conference on Logic Programming and Nonmonotonic Reasoning. <a href="http://dx.doi.org/10.1007/978-3-642-40564-8_21">DOI</a></p>
-
 <h3>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
 
-<p>You can install shogen by running::</p>
+<p>You can install shogen by running:</p>
 
 <pre><code>$ pip install shogen
 </code></pre>
@@ -48,7 +44,7 @@
 <h3>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
 
-<p>Typical usage is::</p>
+<p>Typical usage is:</p>
 
 <pre><code>$ shogen.py [options] genomefile metabolismfile catalysationfile queries
 
@@ -57,6 +53,17 @@ Options:
   -k K, --k=K  Number of ranked  shortest genome segments (Default to 5)
   -l L, --l=L  maximum length of a genome segment (Default to 200)
 </code></pre>
+
+<h3>
+<a name="samples" class="anchor" href="#samples"><span class="octicon octicon-link"></span></a>Samples</h3>
+
+<p>Sample files for finding functional gene units in e. coli are available here::
+      <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt">genome.txt</a> <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/metabolism.txt">metabolism.sbml</a> <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/catalyze.txt">catalyze.txt</a> <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/queries.txt">queries.txt</a></p>
+
+<h3>
+<a name="related-publications" class="anchor" href="#related-publications"><span class="octicon octicon-link"></span></a>Related publications</h3>
+
+<p>An ASP application in integrative biology: identification of functional gene units. (2013). 12th International Conference on Logic Programming and Nonmonotonic Reasoning. <a href="http://dx.doi.org/10.1007/978-3-642-40564-8_21">DOI</a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/bioasp">bioasp</a></p>
