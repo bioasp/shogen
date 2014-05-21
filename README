@@ -10,7 +10,7 @@ Usage
 =====
 
 Typical usage is::
-	
+
 	$ shogen.py [options] genomefile metabolismfile catalysationfile queries
 
 	Options:
