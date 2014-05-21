@@ -54,7 +54,7 @@ if __name__ == '__main__':
     print "done."
 
     inst=instance.to_file()
-    instance.to_file("inst.lp")
+    #instance.to_file("inst.lp")
     print "create instance ...",
     ksip_instance = query.get_ksip_instance(inst,length)
     print "done.",len(ksip_instance)

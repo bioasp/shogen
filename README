@@ -12,7 +12,7 @@ Usage
 Typical usage is::
 	
 	$ shogen.py [options] genomefile metabolismfile catalysationfile queries
-	
+
 	Options:
 	  -h, --help   show this help message and exit
 	  -k K, --k=K  Number of ranked  shortest genome segments (Default to 5)
