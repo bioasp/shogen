@@ -3,7 +3,9 @@ Installation
 
 You can install shogen by running::
 
-	$ pip install shogen
+	$ pip install --user shogen
+
+The executable scripts can then be found in ~/.local/bin.
 
 
 Usage
@@ -23,7 +25,7 @@ Samples
 =======
 
 Sample files for finding functional gene units in e. coli are available here::
-      genome.txt_ metabolism.sbml_ catalyze.txt_ queries.txt_
+      genome.txt_ metabolism.txt_ catalyze.txt_ queries.txt_
 
 .. _genome.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt
 .. _metabolism.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/metabolism.txt
