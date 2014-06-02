@@ -34,7 +34,7 @@ class install(_install):
 setup(cmdclass={'install': install},
       name='shogen',
       version='1.4.2',
-      url='http://pypi.python.org/pypi/shogen/',
+      url='http://bioasp.github.io/shogen/',
       license='GPLv3+',
       description='Finding shortest genome segments that regulate metabolic pathways.',
       long_description=open('README').read(),
