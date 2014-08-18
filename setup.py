@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of shogen.
 #
@@ -33,11 +33,11 @@ class install(_install):
                          
 setup(cmdclass={'install': install},
       name='shogen',
-      version='1.4.2',
+      version='1.4.3',
       url='http://bioasp.github.io/shogen/',
       license='GPLv3+',
       description='Finding shortest genome segments that regulate metabolic pathways.',
-      long_description=open('README.md').read(),
+      long_description=open('README.rst').read(),
       author='Sven Thiele',
       author_email='sthiele78@gmail.com',
       packages = ['__shogen__'],

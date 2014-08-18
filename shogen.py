@@ -1,5 +1,5 @@
 #!python
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of shogen.
 #
@@ -49,38 +49,38 @@ if __name__ == '__main__':
     k = options.k
     length = options.l
 
-    print "read instance files ...",
+    print("read instance files ...",end='')
     instance, dictg, revdictr, dictr, oldcouples = utils.createInstance(genome_string,metabolism_string,catalysation_string) 
-    print "done."
+    print("done.")
 
     inst=instance.to_file()
     #instance.to_file("inst.lp")
-    print "create instance ...",
+    print("create instance ...",end='')
     ksip_instance = query.get_ksip_instance(inst,length)
-    print "done.",len(ksip_instance)
+    print("done.",len(ksip_instance))
  
     kinst=ksip_instance.to_file()
     
-    print "read queries ...", 
+    print("read queries ...",end='')
     couples, revdictr = utils.readcouples(couple_string, dictr, revdictr)
-    print "done.", len(couples)
+    print("done.", len(couples))
         
-    print "filter queries ...",    
+    print("filter queries ...",end='')
     filter_couples = query.filter_couples(couples,kinst)
-    print "done.",len(filter_couples)
+    print("done.",len(filter_couples))
        
     new_couples = []
     for a in filter_couples :
       new_couples.append([int(a.arg(0)), int(a.arg(1))] )
       
-    print "create sgs instance ...",
+    print("create sgs instance ...",end='')
     sgs_instance = query.get_sgs_instance(inst,length)
-    print "done.",len(sgs_instance)
+    print("done.",len(sgs_instance))
     sgs_instance_f = sgs_instance.to_file()
       
       
     for s,g in new_couples: 
-      print "\n"+str(k)+" best gene units catalyzing pathway from reaction",revdictr[s],"to",revdictr[g]
+      print("\n"+str(k)+" best gene units catalyzing pathway from reaction",revdictr[s],"to",revdictr[g])
       query.get_k_sgs(sgs_instance_f, s, g, length, k, dictg, revdictr)
     os.unlink(sgs_instance_f)
 	    
