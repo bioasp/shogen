@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of shogen.
 #
@@ -32,18 +32,18 @@ class install(_install):
         _install.run(self)
                          
 setup(cmdclass={'install': install},
-      name='shogen2',
-      version='1.1.1',
-      url='http://pypi.python.org/pypi/shogen2/',
+      name='shogen',
+      version='2.0.0',
+      url='http://pypi.python.org/pypi/shogen/',
       license='GPLv3+',
       description='Finding shortest genome segments that regulate metabolic pathways',
-      long_description=open('README.md').read(),
+      long_description=open('README.rst').read(),
       author='Sven Thiele',
       author_email='sthiele78@gmail.com',
-      packages = ['__shogen2__'],
-      package_dir = {'__shogen2__' : 'src'},
-      package_data = {'__shogen2__' : ['encodings/*.lp']},
-      scripts = ['shogen2.py'],
+      packages = ['__shogen__'],
+      package_dir = {'__shogen__' : 'src'},
+      package_data = {'__shogen__' : ['encodings/*.lp']},
+      scripts = ['shogen.py'],
       install_requires=[
         "pyasp == 1.3.3"
       ]

@@ -1,4 +1,4 @@
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of shogen.
 #
@@ -30,15 +30,15 @@ def read_genome(genome_string) :
   g = 0 # Counter to define the matchings between real names and ASP names
   for line in genome :
     g+=1
-    dictg[line] = g   
+    dictg[line] = g
     revdictg.append(line)
-    instance.add(Term('gene', [g])) 
-  
+    instance.add(Term('gene', [g]))
+
   genome_f.close()
   return instance, dictg, revdictg
 
 def read_catalysis(catalysation_string, gene_dict) :
-    
+
   instance = TermSet()
   catalysis_f = open(catalysation_string, "r")
 
@@ -46,14 +46,14 @@ def read_catalysis(catalysation_string, gene_dict) :
   catalyzis = catalysis_f.readlines()
   for line in catalyzis :
     cat = line.replace('\r\n','\n').split()
-  
-    if gene_dict.has_key(cat[1]) :
+
+    if cat[1] in gene_dict :
       instance.add(Term('cat', [gene_dict[cat[1]],"\""+cat[0]+"\""]))
 
   catalysis_f.close()
   return instance
 
-  
+
   instance = TermSet()
 
   igenome = open(genome_string, "r")
@@ -63,33 +63,33 @@ def read_catalysis(catalysation_string, gene_dict) :
   g = 0 # Counter to define the matchings between real names and ASP names
   for line in genome :
     g+=1
-    dictg[line] = g   
+    dictg[line] = g
     revdictg.append(line)
     instance.add(Term('gene', [g]))
-    
-  
+
+
   imetabolism = open(metabolism_string, "r")
   metabolism = imetabolism.read().replace('\r\n','\n').splitlines()
   dictr = {}# Dictionnary for the reactions
   revdictr = [0]
   r = 0 # Counter to define the matchings between real names and ASP names
-  
+
   for line in metabolism :
     if line !="":
       link = line.split()
-      if not dictr.has_key(link[0]) :
-	r+=1
-	dictr[link[0]] = r
-	revdictr.append(link[0])
-      if not dictr.has_key(link[1]) :
-	r+=1
-	dictr[link[1]] = r
-	revdictr.append(link[1])
+      if link[0] not in dictr :
+        r+=1
+        dictr[link[0]] = r
+        revdictr.append(link[0])
+      if link[1] not in dictr :
+        r+=1
+        dictr[link[1]] = r
+        revdictr.append(link[1])
       instance.add(Term('redge', [dictr[link[0]],dictr[link[1]]]))
 
   #print("\t\t</nodes>\n")
 
-  
+
   icatalyzis = open(catalysation_string, "r")
 
   catalyzistab=[]
@@ -97,52 +97,52 @@ def read_catalysis(catalysation_string, gene_dict) :
   catalyzis = icatalyzis.readlines()
   for line in catalyzis :
     cat = line.replace('\r\n','\n').split()
-  
-    if dictr.has_key(cat[0]) and dictg.has_key(cat[1]) :
+
+    if cat[0] in dictr and cat[1] in dictg :
       instance.add(Term('cat', [dictg[cat[1]],dictr[cat[0]]]))
       while i < dictr[cat[0]]+1 :
-	catalyzistab.append([])
-	i+=1
-      catalyzistab[dictr[cat[0]]].append(dictg[cat[1]])  
+        catalyzistab.append([])
+        i+=1
+      catalyzistab[dictr[cat[0]]].append(dictg[cat[1]])
     #else :
       #print "irrelevant gene or reaction",cat[1],cat[0]
 
-  #print len(catalyzistab)      
+  #print len(catalyzistab)
   #exit(0)
-      
+
   couplestab = []
   for i in range(len(catalyzistab)) :
     for j in range(len(catalyzistab))[(i+1):] :
       condition = True
       for g1 in catalyzistab[i] :
-	for g2 in catalyzistab[j] :
-	  if condition :
-	    glen = len(dictg)
-	    if min(abs(g1-g2),glen-abs(g1-g2)) <= 10 :
-	      couplestab.append([i,j])
-	      condition = False    
-	      
+        for g2 in catalyzistab[j] :
+          if condition :
+            glen = len(dictg)
+            if min(abs(g1-g2),glen-abs(g1-g2)) <= 10 :
+              couplestab.append([i,j])
+              condition = False
+
   return instance, revdictg, revdictr, dictr, couplestab
 
 
 
 def readcouples(couple_string) :
   couples = TermSet()
-  
+
   couples_f = open(couple_string, "r")
   bla =  couples_f.read().replace('\r\n','\n').splitlines()
 
   for line in bla :
     link = line.split()
     couples.add(Term('pair', ["\""+link[0]+"\"","\""+link[1]+"\""]))
-    
+
   couples_f.close()
   return couples
 
 
-  
-   
-  
+
+
+
 def clean_up() :
   if os.path.isfile("parser.out"): os.remove("parser.out")
   if os.path.isfile("asp_py_lextab.py"): os.remove("asp_py_lextab.py")

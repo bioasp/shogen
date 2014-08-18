@@ -1,5 +1,5 @@
 #!python
-# Copyright (c) 2012, Sven Thiele <sthiele78@gmail.com>
+# Copyright (c) 2014, Sven Thiele <sthiele78@gmail.com>
 #
 # This file is part of shogen.
 #
@@ -17,8 +17,10 @@
 # along with shogen.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
 import os
+import sys
 from optparse import OptionParser
-from __shogen2__ import query, utils, sbml
+from pyasp.asp import *
+from __shogen__ import query, utils, sbml
 
 
 if __name__ == '__main__':
@@ -49,34 +51,37 @@ if __name__ == '__main__':
     k = options.k
     length = options.l
 
-    print '\nReading genome from ',genome_string,'...',
+    print('\nReading genome from',genome_string,'... ',end='')
     genome, genedict, revdictg = utils.read_genome(genome_string)
-    print 'done.'
-    #print genome
-    #print genedict
+    print('done.')
+    #print(genome
+    #print(genedict
 
-    print '\nReading metabolic network from ',metabolism_string,'...',
+    print('\nReading metabolic network from',metabolism_string,'... ',end='')
     metabolism = sbml.readSBMLnetwork(metabolism_string)
-    print 'done.'
-    #print metabolism
+    print('done.')
+    #print(metabolism
     
-    print '\nReading catalysation information from ',catalysation_string,'...',
+    print('\nReading catalysation information from',catalysation_string,'... ',end='')
     catalysis = utils.read_catalysis(catalysation_string, genedict)
-    print 'done.'
+    print('done.')
 
     
-    instance=genome.union(metabolism).union(catalysis)
-    inst=instance.to_file()
+    instance=TermSet(genome.union(metabolism).union(catalysis))
+    inst = instance.to_file()
     
     
-    print "read queries ...", 
+    print('\nReading queries from',couple_string,'... ',end='')
     couples = utils.readcouples(couple_string)
-    print "done.", len(couples)
+    print("done.")
+    print('  ', len(couples), 'queries.')
     
 
-    print "filter queries ...",    
+    print("Filtering plausible queries ... ",end='')
+    sys.stdout.flush()
     filter_couples = query.filter_couples(couples,inst,length)
-    print "done.",len(filter_couples)
+    print("done.")
+    print('  ', len(filter_couples), 'queries.')
 
     
     new_couples = []
@@ -84,7 +89,7 @@ if __name__ == '__main__':
       new_couples.append([a.arg(0), a.arg(1)] )
     
     for s,e in new_couples: 
-      print "\n"+str(k)+" best gene units catalyzing pathway from reaction",s,"to",e
+      print("\n"+str(k)+" best gene units catalyzing pathway from reaction",s,"to",e)
       ret = query.get_sgs(inst, s, e, length, k, revdictg)
     os.unlink(inst)
     utils.clean_up()
