@@ -54,19 +54,13 @@ if __name__ == '__main__':
     print("done.")
 
     inst=instance.to_file()
-    #instance.to_file("inst.lp")
-    print("create instance ...",end='')
-    ksip_instance = query.get_ksip_instance(inst,length)
-    print("done.",len(ksip_instance))
- 
-    kinst=ksip_instance.to_file()
     
     print("read queries ...",end='')
     couples, revdictr = utils.readcouples(couple_string, dictr, revdictr)
     print("done.", len(couples))
         
-    print("filter queries ...",end='')
-    filter_couples = query.filter_couples(couples,kinst)
+    print "filter queries ...",
+    filter_couples = query.filter_couples(couples,inst,length)
     print("done.",len(filter_couples))
        
     new_couples = []
