@@ -59,7 +59,7 @@ if __name__ == '__main__':
     couples, revdictr = utils.readcouples(couple_string, dictr, revdictr)
     print("done.", len(couples))
         
-    print "filter queries ...",
+    print ("filter queries ...",end='')
     filter_couples = query.filter_couples(couples,inst,length)
     print("done.",len(filter_couples))
        
