@@ -2,8 +2,6 @@
 % redge(R1,R2).
 % cat(G,R).
 % pmax(U)
-
-
 % this logic program yields only one answerset
 
 % the last gene
@@ -80,7 +78,9 @@ rpath(p(GY,RY),p(GZ,RZ)) :- rpath(p(GX,RX),p(GZ,RZ)),
 
 vpair(RS,RZ)     :- fpath(p(GZ,RZ),p(GS,RS)), rpath(p(GS,RS),p(GZ,RZ)), pair(RS,RZ).
 
+
 #hide.
+% #show fpath/2.
 #show vpair/2.
 
 
