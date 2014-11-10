@@ -21,40 +21,18 @@ from pyasp.asp import *
 
 root = __file__.rsplit('/', 1)[0]
 
-prepro_prg =      root + '/encodings/preprocess.lp'
-length_prg =    root + '/encodings/sgs.lp'
-convert_prg =   root + '/encodings/convert.lp'
-convert_sds_prg =   root + '/encodings/convert_sds.lp'
 filter_prg =      root + '/encodings/filter_couples.lp'
-
-
-class ASPrinter:
-  def write(self,count, termset):
-    print(count,":",termset)
-
-class EdgePrinter:
-  def __init__(self,dictg,revdictr):
-    self.dictg = dictg
-    self.revdictr = revdictr
-  def write(self,count, termset):
-    print(str(count)+":",end='')
-    for t in termset:
-      if t.pred() == "fedge" :
-        print("("+self.dictg[int(t.arg(0).arg(0))]+","+self.revdictr[int(t.arg(0).arg(1))]+")-"+str(t.arg(2))+"->("+self.dictg[int(t.arg(1).arg(0))]+","+self.revdictr[int(t.arg(1).arg(1))]+")",end='')
-      if t.pred() == "zwoop" :
-        print("zwoop("+self.dictg[int(t.arg(0).arg(0))]+","+self.revdictr[int(t.arg(0).arg(1))]+")->("+self.dictg[int(t.arg(1).arg(0))]+","+self.revdictr[int(t.arg(1).arg(1))]+")",end='')
-    print(" ")
+sgs_prg =    root + '/encodings/sgs.lp'
 
 
 class GenePrinter:
-  def __init__(self,dictg,revdictr):
+  def __init__(self,dictg):
     self.dictg = dictg
-    self.revdictr = revdictr
   def write(self,count, termset):
-    print(str(count)+":",end='')
+    print(str(count),": ",sep='',end='')
     for t in termset:
       if t.pred() == "ugene" :
-        print(self.dictg[int(t.arg(0))],end='')
+        print(self.dictg[int(t.arg(0))],end=' ')
       else:
         print(t)
     print(" ")
@@ -63,10 +41,8 @@ class GenePrinter:
 def filter_couples(couple_facts, instance, pmax):
     pmaxfact = String2TermSet('pmax('+str(pmax)+')')
     pmaxf=pmaxfact.to_file()
-    couplesf=couple_facts.to_file()
-    
+    couplesf=couple_facts.to_file()    
     prg = [filter_prg, instance, pmaxf, couplesf]
-    #couple_facts.to_file("couples.lp")
     solver = GringoClasp()
     models = solver.run(prg,collapseTerms=True, collapseAtoms=False)
     os.unlink(pmaxf)
@@ -74,83 +50,53 @@ def filter_couples(couple_facts, instance, pmax):
     return models[0]
 
 
-def get_sgs_instance(instance, pmax):
 
-    pmaxfact = String2TermSet('pmax('+str(pmax)+')')
-
-    inst=pmaxfact.to_file()
-    prg = [convert_sds_prg , instance, inst ]
-
-    solver = GringoClasp()
-    solution = solver.run(prg,collapseTerms=False, collapseAtoms=False)
-    os.unlink(inst)
-    return solution[0]
-
-
-def preprocess(instance, start, goal, pmax):
-    startfact = String2TermSet('start('+str(start)+')')
-    goalfact = String2TermSet('goal('+str(goal)+')')
+def get_sgs(instance, s, e, pmax, k, dictg):
+# grounding is the problem (takes long)
+    startfact = String2TermSet('start('+str(s)+')')
+    goalfact = String2TermSet('end('+str(e)+')')
     pmaxfact = String2TermSet('pmax('+str(pmax)+')')
     details = TermSet(startfact.union(goalfact).union(pmaxfact))
     details_f = details.to_file()
-    prg = [prepro_prg, instance, details_f ]
 
-    solver = GringoClasp()
-    solution = solver.run(prg,1)
-
-    os.unlink(details_f)
-    return solution[0]
-
-
-def get_k_sgs(instance, start, end, pmax, k, dictg, revdictr):
-    startfact = String2TermSet('start('+str(start)+')')
-    endfact = String2TermSet('end('+str(end)+')')
-    pmaxfact = String2TermSet('pmax('+str(pmax)+')')
-
-    details = TermSet(startfact.union(endfact).union(pmaxfact))
-
-
-    details_f=details.to_file()
     count=0
     min=1
-    geneprinter = GenePrinter(dictg, revdictr)
+    geneprinter = GenePrinter(dictg)
 
-    #while len(solutions) < k :
     while count < k :
-      prg = [length_prg , instance, details_f ]
+      prg = [sgs_prg, instance, details_f ]
       goptions=' --const pmin='+str(min)
-      coptions='--opt-heu --opt-strategy=1 --heu=vsids '
+      coptions='--opt-heu --opt-strategy=1 --heu=vsids'
       #coptions='--opt-heu --heu=vsids'
       solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
       #solver = GringoUnClasp(gringo_options=goptions,clasp_options=coptions)
       #print("search1 ...",
-      optima = solver.run(prg,collapseTerms=True,collapseAtoms=False)
-
-
+      optima = solver.run(prg, collapseTerms=True, collapseAtoms=False)
       if len(optima) :
         count  += 1
         min= optima[0].score[0]
-
         print("length:",min)
         geneprinter.write(count,optima[0])
-        #min=optima[0][0]
 
-        prg = [length_prg , instance, details_f, exclude_sol([optima[0]]) ]
+        prg = [sgs_prg , instance, details_f, exclude_sol([optima[0]]) ]
         goptions='--const pmin='+str(min)
         coptions='--opt-heu --opt-strategy=1 --opt-mode=optN --opt-bound='+str(min)
         solver = GringoClasp(gringo_options=goptions,clasp_options=coptions)
         #print("search2 ...",
-        sols = solver.run(prg,collapseTerms=True,collapseAtoms=False)
-        for i in sols :
-          count+=1
+        #num = solver.run_print(prg,geneprinter,0)
+        solutions = solver.run(prg, collapseTerms=True, collapseAtoms=False)
+        for i in solutions :
+          count += 1
           geneprinter.write(count,i)
+
         os.unlink(prg[3])
+        #count += len(solutions)
         min+=1
       else :
         os.unlink(details_f)
         return
 
     os.unlink(details_f)
-    return
+
 
   

@@ -1,13 +1,10 @@
 % shortest_genome_segment.lp
-% cat_gene(G).
-% last(G).
-% edge(R1,R2).
-% cat(G,R).
 % start(R).
 % end(R).
 % pmax(U).
 #const pmin=1.
-
+last(L) :- gene(L), not gene(L+1).
+cat_gene(G) :- cat(G,R).
 
 sgene(G) :- start(R),cat(G,R).
 egene(G) :- end(R),cat(G,R).
@@ -52,7 +49,7 @@ pse(S,E) :- cat_gene(S),cat_gene(E), S>E,
 % choose start and end genes
 1{se(S,E): pse(S,E)}1.
 
-% the following genes are the activated
+% the following genes are on the segment
 cgene(S) :- se(S,E).
 cgene(E) :- se(S,E).
 
@@ -63,23 +60,27 @@ cgene(X) :- se(S,E), S>E, cat_gene(X), X>S.
 cgene(X) :- se(S,E), S>E, cat_gene(X), X<E. 
 
 
-% active edges
-aedge(X,Y) :- edge(X,Y), cat(G1,X), cat(G2,Y), cgene(G1), cgene(G2), G1!=G2.
-aedge(X,Y) :- edge(X,Y),cat(G,X), cat(G,Y), cgene(G).
-
 % active reactions
-area(R) :- start(R), cgene(G), sgene(G).
-area(Y) :- area(X), aedge(X,Y), end(E), X!=E.
-:- not area(X), end(X).
+area(R) :- reaction(R), cgene(G), cat(G,R).
+iscat(R) :- cat(G,R).
+area(R) :- reaction(R), not iscat(R).
 
-brea(R) :- end(R), cgene(G), sgene(G).
-brea(X) :- brea(Y), aedge(X,Y), start(S), Y!=S.
+reached(R) :- start(R).
+reached(R) :- area(R), produced(M): reactant(M,R).
+reached(R) :- area(R), reversible(R), produced(M): product(M,R).
+produced(M) :- product(M,R), reached(R).
+produced(M) :- reactant(M,R), reached(R), reversible(R).
+:-end(R), not reached(R).
 
+breached(R) :- end(R).
+breached(R) :- area(R), consumed(M), product(M,R).
+breached(R) :- area(R), reversible(R), consumed(M), reactant(M,R).
+consumed(M) :- reactant(M,R), breached(R).
+produced(M) :- product(M,R), breached(R), reversible(R).
+:-start(R), not breached(R).
 
 %used genes
-ugene(X) :- sgene(X), cgene(X).
-ugene(X) :- egene(X), cgene(X).
-ugene(G) :- cgene(G), cat(G,X), area(X),brea(X).
+ugene(G) :- cgene(G), cat(G,X), reached(X),breached(X).
 
 :- se(S,E), not ugene(S).
 :- se(S,E), not ugene(E).
