@@ -5,7 +5,6 @@
 last(L) :- gene(L), not gene(L+1).
 iscat(R) :- cat(G,R).
 niscat(R) :- reaction(R), not  iscat(R).
-
 revniscat(R) :- reversible(R),niscat(R).
 
 dist(R1,R2) :- cat(G1,R1), cat(G2,R2), G1 >G2, 
@@ -33,29 +32,26 @@ goodpair(S,Z) :- pair(S,Z), dist(S,Z).
 goodstart(S) :- goodpair(S,Z).
 
 fpath(M,S) :- product(M,S), goodstart(S).
-fpath(M,S) :- reactant(M,S),goodstart(S), reversible(R).
+fpath(M,S) :- reactant(M,S), goodstart(S), reversible(R).
+
+fpath(M,S) :- product(M,R), rpath(R,S).
+
+fpath(M,S) :- reactant(M,R), iscat(R), reversible(R),
+              rpath(R,S).
+
 rpath(R,S) :- iscat(R), goodpair(S,Z),
               fpath(M2,S): reactant(M2,R),
               dist(S,R),
               dist(R,Z).
-fpath(M,S) :- product(M,R), rpath(R,S).
-
 
 rpath(R,S) :- niscat(R),goodstart(S),
               fpath(M2,S): reactant(M2,R).
-
-%fpath(M,S) :- product(M,R), rpath(R,S).
 
 
 rpath(R,S) :- iscat(R), goodpair(S,Z), reversible(R),
               fpath(M2,S): product(M2,R),
               dist(S,R),
               dist(R,Z).
-
-fpath(M,S) :- reactant(M,R), iscat(R), reversible(R),
-              rpath(R,S).
-
-
 
 rpath(R,S) :- revniscat(R),
               fpath(M2,S): product(M2,R),
@@ -69,7 +65,6 @@ vpair(S,Z)     :- rpath(Z,S), pair(S,Z).
 #hide.
 % #show fpath/2.
 #show vpair/2.
-pmax(200).
 
 
 
