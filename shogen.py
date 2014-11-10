@@ -83,22 +83,9 @@ if __name__ == '__main__':
     print("done.")
     print('  ', len(filter_couples), 'queries.')
 
-<<<<<<< HEAD
-    inst=instance.to_file()
-    
-    print("read queries ...",end='')
-    couples, revdictr = utils.readcouples(couple_string, dictr, revdictr)
-    print("done.", len(couples))
-        
-    print ("filter queries ...",end='')
-    filter_couples = query.filter_couples(couples,inst,length)
-    print("done.",len(filter_couples))
-       
-=======
-    
->>>>>>> b1ff3c9bdc88a5b48506188ad30c9107dd72f605
+  
     new_couples = []
-    for a in couples :
+    for a in filter_couples :
       new_couples.append([a.arg(0), a.arg(1)] )
     
     for s,e in new_couples: 

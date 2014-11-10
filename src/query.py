@@ -41,28 +41,14 @@ class GenePrinter:
 def filter_couples(couple_facts, instance, pmax):
     pmaxfact = String2TermSet('pmax('+str(pmax)+')')
     pmaxf=pmaxfact.to_file()
-    couplesf=couple_facts.to_file()
-    
+    couplesf=couple_facts.to_file()    
     prg = [filter_prg, instance, pmaxf, couplesf]
-    #couple_facts.to_file("couples.lp")
     solver = GringoClasp()
     models = solver.run(prg,collapseTerms=True, collapseAtoms=False)
     os.unlink(pmaxf)
     os.unlink(couplesf)
     return models[0]
 
-
-#def get_sgs_instance(instance, pmax):
-
-    #pmaxfact = String2TermSet('pmax('+str(pmax)+')')
-
-    #inst=pmaxfact.to_file()
-    #prg = [convert_sds_prg , instance, inst ]
-
-    #solver = GringoClasp()
-    #solution = solver.run(prg,collapseTerms=False, collapseAtoms=False)
-    #os.unlink(inst)
-    #return solution[0]
 
 
 def get_sgs(instance, s, e, pmax, k, dictg):
