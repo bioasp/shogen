@@ -1,48 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Shogen by bioasp</title>
+    <meta name="description" content="Shogen : Finding shortest genome segments that regulate metabolic pathways">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Shogen</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Shogen</h1>
-        <p>Finding shortest genome segments that regulate metabolic pathways</p>
 
-        <p class="view"><a href="https://github.com/bioasp/shogen">View the Project on GitHub <small>bioasp/shogen</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/bioasp/shogen">View on GitHub</a>
 
+          <h1 id="project_title">Shogen</h1>
+          <h2 id="project_tagline">Finding shortest genome segments that regulate metabolic pathways</h2>
 
-        <ul>
-          <li><a href="https://github.com/bioasp/shogen/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/bioasp/shogen/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/bioasp/shogen">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/bioasp/shogen/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/bioasp/shogen/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h1>
-<a name="identification-of-functional-gene-units" class="anchor" href="#identification-of-functional-gene-units"><span class="octicon octicon-link"></span></a>Identification of Functional Gene Units</h1>
+<a id="identification-of-functional-gene-units" class="anchor" href="#identification-of-functional-gene-units" aria-hidden="true"><span class="octicon octicon-link"></span></a>Identification of Functional Gene Units</h1>
 
 <p>Integrating heterogeneous knowledge is necessary to elucidate the regulations in biological systems. In particular, such an integration is widely used to identify functional units, that are sets of genes that can be triggered by the same external stimuli, as biological stresses, and that are linked to similar responses of the system. Although several models and algorithms shown great success for detecting functional units on well-known biological species, they fail in identifying them when applied to more exotic species, such as extremophiles, that are by nature unrefined. Shortest Genome Segments (SGS) is a new model of functional units with a predictive power that is comparable to existing methods but overcomes this crucial limitation. In contrary to existing methods, SGS are stable in (i) computational time and (ii) ability to predict functional units when one deteriorates the biological knowledge, which simulates cases that occur for exotic species. </p>
 
 <h3>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
 
 <p>You can install shogen by running:</p>
 
 <pre><code>$ pip install --user shogen
 </code></pre>
 
+<p>On Linux the executable script can then be found in <code>~/.local/bin</code></p>
+
+<p>and on MacOS the script is under <code>/Users/YOURUSERNAME/Library/Python/2.7/bin</code>.</p>
+
 <h3>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
 
 <p>Typical usage is:</p>
 
@@ -55,22 +62,27 @@ Options:
 </code></pre>
 
 <h3>
-<a name="samples" class="anchor" href="#samples"><span class="octicon octicon-link"></span></a>Samples</h3>
+<a id="samples" class="anchor" href="#samples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Samples</h3>
 
 <p>Sample files for finding functional gene units in e. coli are available here::
       <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt">genome.txt</a> <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/metabolism.txt">metabolism.sbml</a> <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/catalyze.txt">catalyze.txt</a> <a href="http://bioasp.github.io/downloads/samples/ecoli_K12data/queries.txt">queries.txt</a></p>
 
 <h3>
-<a name="related-publications" class="anchor" href="#related-publications"><span class="octicon octicon-link"></span></a>Related publications</h3>
+<a id="related-publications" class="anchor" href="#related-publications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Related publications</h3>
 
 <p>An ASP application in integrative biology: identification of functional gene units. (2013). 12th International Conference on Logic Programming and Nonmonotonic Reasoning. <a href="http://dx.doi.org/10.1007/978-3-642-40564-8_21">DOI</a></p>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/bioasp">bioasp</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Shogen maintained by <a href="https://github.com/bioasp">bioasp</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
