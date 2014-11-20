@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Shogen - Finding shortest genome segments that regulate metabolic pathways</title>
+<title>{{ page.title }} - {{ page.tagline }}</title>
 <link href="css/bootstrap.css" rel="stylesheet">
 <style type="text/css">
 body {
@@ -28,6 +28,7 @@ background-color: #76e076;
 /* background-repeat: repeat-x; */
 color: #FFFFFF;
 }
+
 </style>
 </head>
 
@@ -44,16 +45,20 @@ color: #FFFFFF;
 </div>
 <div class="collapse navbar-collapse">
 <ul class="nav navbar-nav">
-<li><a href="https://github.com/bioasp/shogen">View on GitHub</a></li>
+<li><a href={{ site.github.repository_url }}>View on GitHub</a></li>
 </ul>
 </div><!--/.nav-collapse -->
 </div>
 </div>
 
+<!--<ul class="pager">
+  <li class="previous"><a href="https://bioasp.github.io">BioASP</a></li>
+  <li class="next"><a href="https://github.com/bioasp/iggy">View on GitHub</a></li>
+</ul>-->
     <div class="bs-docs-header" id="content">
     <div class="container">
-     <h1>Shogen</h1>
-     <p>Finding shortest genome segments that regulate metabolic pathways.</p>
+     <h1>{{ page.title }}</h1>
+     <p>{{ page.tagline }}</p>
     </div>
     </div>
     
