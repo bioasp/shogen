@@ -1,5 +1,7 @@
 ---
 layout: index
+title: Shogen
+tagline: Finding shortest genome segments that regulate metabolic pathways.
 ---
 
 # Identification of Functional Gene Units
