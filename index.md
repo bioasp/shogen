@@ -1,10 +1,10 @@
 ---
 layout: index
-title: Shogen
+title: shogen
 tagline: Finding shortest genome segments that regulate metabolic pathways
 ---
 
-# Identification of Functional Gene Units
+### Identification of Functional Gene Units
 Integrating heterogeneous knowledge is necessary to elucidate the regulations in biological systems. In particular, such an integration is widely used to identify functional units, that are sets of genes that can be triggered by the same external stimuli, as biological stresses, and that are linked to similar responses of the system. Although several models and algorithms shown great success for detecting functional units on well-known biological species, they fail in identifying them when applied to more exotic species, such as extremophiles, that are by nature unrefined. Shortest Genome Segments (SGS) is a new model of functional units with a predictive power that is comparable to existing methods but overcomes this crucial limitation. In contrary to existing methods, SGS are stable in (i) computational time and (ii) ability to predict functional units when one deteriorates the biological knowledge, which simulates cases that occur for exotic species. 
 
 
