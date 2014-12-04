@@ -15,7 +15,7 @@ You can install shogen by running:
 	$ pip install --user shogen
 On Linux the executable script can then be found in ``~/.local/bin``
 
-and on MacOS the script is under ``/Users/YOURUSERNAME/Library/Python/2.7/bin``.
+and on Mac OS the script is under ``/Users/YOURUSERNAME/Library/Python/2.7/bin``.
 
 ### Usage
 
@@ -38,3 +38,49 @@ Sample files for finding functional gene units in e. coli are available here:
 ### Related publications
 
 An ASP application in integrative biology: identification of functional gene units. (2013). 12th International Conference on Logic Programming and Nonmonotonic Reasoning. [DOI](http://dx.doi.org/10.1007/978-3-642-40564-8_21)
+
+
+### FAQ
+
+**Q**: I don't have pip. How can I install pip without admin rights?
+
+**A**: You can install pip without admin rights.
+
+1. Download [getpip.py](https://raw.github.com/pypa/pip/master/contrib/get-pip.py).
+
+		$ wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+
+2. Install pip locally. 
+
+		$ python get-pip.py --user
+
+3. You can install using your local pip.
+
+**Q**: I don't have pip. How can I install shogen without pip?
+
+**A**:  You can install shogen without pip if you take care of the dependencies yourself.
+
+1. Download [pyasp-1.3.3](https://pypi.python.org/pypi/pyasp/1.3.3). 
+ 
+		$ wget https://pypi.python.org/packages/source/p/pyasp/pyasp-1.3.3.tar.gz
+
+2. Extract and install pyasp. 
+
+		$ gzip -d pyasp-1.3.3.tar.gz
+		$ tar -xvf pyasp-1.3.3.tar
+		$ cd pyasp-1.3.3
+		$ python setup.py install --user
+
+3. Download [shogen-1.4.3](https://pypi.python.org/packages/source/s/shogen/shogen-1.4.3.tar.gz). 
+
+		$ wget https://pypi.python.org/packages/source/s/shogen/shogen-1.4.3.tar.gz
+ 
+4. Extract and install shogen.
+
+		$ gzip -d shogen-1.4.3.tar.gz
+		$ tar -xvf shogen-1.4.3.tar
+		$ cd shogen-1.4.3
+		$ python setup.py install --user
+	
+
+   The executable script can then be found in ``~/.local/bin`` on Linux and in ``/Users/YOURUSERNAME/Library/Python/2.7/bin``on Mac OS.
