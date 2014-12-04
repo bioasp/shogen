@@ -37,7 +37,7 @@ Sample files for finding functional gene units in e. coli are available here:
 
 ### Related publications
 
-An ASP application in integrative biology: identification of functional gene units. (2013). 12th International Conference on Logic Programming and Nonmonotonic Reasoning. [DOI](http://dx.doi.org/10.1007/978-3-642-40564-8_21)
+*An ASP application in integrative biology: identification of functional gene units.* (2013). 12th International Conference on Logic Programming and Nonmonotonic Reasoning. [DOI](http://dx.doi.org/10.1007/978-3-642-40564-8_21)
 
 
 ### FAQ
