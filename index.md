@@ -32,7 +32,7 @@ Typical usage is:
 ### Samples
 
 Sample files for finding functional gene units in e. coli are available here:
-      [genome.txt](http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt) [metabolism.sbml](http://bioasp.github.io/downloads/samples/ecoli_K12data/metabolism.txt) [catalyze.txt](http://bioasp.github.io/downloads/samples/ecoli_K12data/catalyze.txt) [queries.txt](http://bioasp.github.io/downloads/samples/ecoli_K12data/queries.txt)
+      [genome.txt](http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt) [metabolism.txt](http://bioasp.github.io/downloads/samples/ecoli_K12data/metabolism.txt) [catalyze.txt](http://bioasp.github.io/downloads/samples/ecoli_K12data/catalyze.txt) [queries.txt](http://bioasp.github.io/downloads/samples/ecoli_K12data/queries.txt)
 
 
 ### Related publications
