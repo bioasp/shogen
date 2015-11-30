@@ -1,6 +1,6 @@
 
 Installation
-============
+------------
 
 
 You can install shogen by running::
@@ -12,7 +12,7 @@ On Linux the executable script can then be found in ``~/.local/bin``
 and on MacOS the script is under ``/Users/YOURUSERNAME/Library/Python/2.7/bin``.
 
 Usage
-=====
+-----
 
 Typical usage is::
 	
@@ -26,9 +26,9 @@ Typical usage is::
 	  
 	  
 Samples
-=======
+-------
 
-Sample files for finding functional gene units in e. coli are available here::
+Sample files for finding functional gene units in e. coli are available here:
       genome.txt_ metabolism.sbml_ catalyze.txt_ queries.txt_
 
 .. _genome.txt: http://bioasp.github.io/downloads/samples/ecoli_K12data/genome.txt
