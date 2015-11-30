@@ -1,6 +1,6 @@
 
 Installation
-============
+------------
 
 
 You can install shogen2 by running::
@@ -9,7 +9,7 @@ You can install shogen2 by running::
 
 
 Usage
-=====
+-----
 
 Typical usage is::
 	
@@ -23,7 +23,7 @@ Typical usage is::
 	  
 	  
 Samples
-=======
+------
 
 Sample files for finding functional gene units in e. coli are available here::
       genome.txt_ metabolism.sbml_ catalyze.txt_ queries.txt_
