@@ -31,23 +31,18 @@ if __name__ == '__main__':
     parser.add_option("-l", "--l", dest="l", type="int", default=200,
                       help="maximum length of a genome segment (Default to 200)", metavar="L")
     
-    #parser.add_option("-s", action="store_true", dest="SEARCHTYPE",
-                      #help="compute  shortest dna segments")                  
-    #parser.add_option("-c", action="store_true", dest="compress_only",
-                      #help="If set only a compressed graph is computed and stored compressed_graph.txt")
                       
     (options, args) = parser.parse_args()
 
     if len(args) != 4 :
         parser.error("incorrect number of arguments")
          
-    genome_string = args[0]
-    metabolism_string = args[1]
+    genome_string       = args[0]
+    metabolism_string   = args[1]
     catalysation_string = args[2]
-    couple_string =  args[3]
-   
-    k = options.k
-    length = options.l
+    couple_string       =  args[3]
+    k                   = options.k
+    length              = options.l
 
     print '\nReading genome from ',genome_string,'...',
     genome, genedict, revdictg = utils.read_genome(genome_string)
