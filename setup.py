@@ -16,35 +16,20 @@
 # along with shogen.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
 from setuptools import setup
-import os
-import sys
-import platform
-import distutils
-import site
-import sysconfig
 
-from setuptools.command.install import install as _install
-
-
-
-class install(_install):
-    def run(self):
-        _install.run(self)
                          
-setup(cmdclass={'install': install},
-      name='shogen',
-      version='2.0.0',
-      url='http://pypi.python.org/pypi/shogen/',
-      license='GPLv3+',
-      description='Finding shortest genome segments that regulate metabolic pathways',
-      long_description=open('README.rst').read(),
-      author='Sven Thiele',
-      author_email='sthiele78@gmail.com',
-      packages = ['__shogen__'],
-      package_dir = {'__shogen__' : 'src'},
-      package_data = {'__shogen__' : ['encodings/*.lp']},
-      scripts = ['shogen.py'],
-      install_requires=[
-        "pyasp == 1.4"
-      ]
+setup(
+  name             = 'shogen',
+  version          = '2.0.0',
+  url              = 'http://pypi.python.org/pypi/shogen/',
+  license          = 'GPLv3+',
+  description      = 'Finding shortest genome segments that regulate metabolic pathways',
+  long_description = open('README.rst').read(),
+  author           = 'Sven Thiele',
+  author_email     = 'sthiele78@gmail.com',
+  packages         = ['__shogen__'],
+  package_dir      = {'__shogen__' : 'src'},
+  package_data     = {'__shogen__' : ['encodings/*.lp']},
+  scripts          = ['shogen.py'],
+  install_requires = ['pyasp == 1.4' ]
 )

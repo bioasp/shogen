@@ -22,14 +22,13 @@ from pyasp.asp import *
 
 def read_genome(genome_string) :
   instance = TermSet()
-
   genome_f = open(genome_string, "r")
-  genome = genome_f.read().replace('\r\n','\n').split()
-  dictg = {} # Dictionnary for the genes
+  genome   = genome_f.read().replace('\r\n','\n').split()
+  dictg    = {} # Dictionnary for the genes
   revdictg = [0]
-  g = 0 # Counter to define the matchings between real names and ASP names
+  g        = 0 # Counter to define the matchings between real names and ASP names
   for line in genome :
-    g+=1
+    g          += 1
     dictg[line] = g
     revdictg.append(line)
     instance.add(Term('gene', [g]))
@@ -39,11 +38,11 @@ def read_genome(genome_string) :
 
 def read_catalysis(catalysation_string, gene_dict) :
 
-  instance = TermSet()
+  instance    = TermSet()
   catalysis_f = open(catalysation_string, "r")
-
-  i=0
-  catalyzis = catalysis_f.readlines()
+  i           = 0
+  catalyzis   = catalysis_f.readlines()
+  
   for line in catalyzis :
     cat = line.replace('\r\n','\n').split()
 
@@ -56,23 +55,23 @@ def read_catalysis(catalysation_string, gene_dict) :
 
   instance = TermSet()
 
-  igenome = open(genome_string, "r")
-  genome = igenome.read().replace('\r\n','\n').split()
-  dictg = {} # Dictionnary for the genes
+  igenome  = open(genome_string, "r")
+  genome   = igenome.read().replace('\r\n','\n').split()
+  dictg    = {} # Dictionnary for the genes
   revdictg = [0]
-  g = 0 # Counter to define the matchings between real names and ASP names
+  g        = 0 # Counter to define the matchings between real names and ASP names
   for line in genome :
-    g+=1
+    g          += 1
     dictg[line] = g
     revdictg.append(line)
     instance.add(Term('gene', [g]))
 
 
   imetabolism = open(metabolism_string, "r")
-  metabolism = imetabolism.read().replace('\r\n','\n').splitlines()
-  dictr = {}# Dictionnary for the reactions
-  revdictr = [0]
-  r = 0 # Counter to define the matchings between real names and ASP names
+  metabolism  = imetabolism.read().replace('\r\n','\n').splitlines()
+  dictr       = {}# Dictionnary for the reactions
+  revdictr    = [0]
+  r           = 0 # Counter to define the matchings between real names and ASP names
 
   for line in metabolism :
     if line !="":
@@ -90,11 +89,11 @@ def read_catalysis(catalysation_string, gene_dict) :
   #print("\t\t</nodes>\n")
 
 
-  icatalyzis = open(catalysation_string, "r")
+  icatalyzis   = open(catalysation_string, "r")
+  catalyzistab = []
+  i            = 0
+  catalyzis    = icatalyzis.readlines()
 
-  catalyzistab=[]
-  i=0
-  catalyzis = icatalyzis.readlines()
   for line in catalyzis :
     cat = line.replace('\r\n','\n').split()
 
@@ -106,9 +105,6 @@ def read_catalysis(catalysation_string, gene_dict) :
       catalyzistab[dictr[cat[0]]].append(dictg[cat[1]])
     #else :
       #print "irrelevant gene or reaction",cat[1],cat[0]
-
-  #print len(catalyzistab)
-  #exit(0)
 
   couplestab = []
   for i in range(len(catalyzistab)) :
@@ -127,10 +123,10 @@ def read_catalysis(catalysation_string, gene_dict) :
 
 
 def readcouples(couple_string) :
-  couples = TermSet()
+  couples   = TermSet()
 
   couples_f = open(couple_string, "r")
-  bla =  couples_f.read().replace('\r\n','\n').splitlines()
+  bla       =  couples_f.read().replace('\r\n','\n').splitlines()
 
   for line in bla :
     link = line.split()
@@ -144,8 +140,10 @@ def readcouples(couple_string) :
 
 
 def clean_up() :
-  if os.path.isfile("parser.out"): os.remove("parser.out")
-  if os.path.isfile("asp_py_lextab.py"): os.remove("asp_py_lextab.py")
-  if os.path.isfile("asp_py_lextab.pyc"): os.remove("asp_py_lextab.pyc")
-  if os.path.isfile("asp_py_parsetab.py"): os.remove("asp_py_parsetab.py")
-  if os.path.isfile("asp_py_parsetab.pyc"): os.remove("asp_py_parsetab.pyc") 
+  if os.path.isfile("parser.out")          : os.remove("parser.out")
+  if os.path.isfile("asp_py_lextab.py")    : os.remove("asp_py_lextab.py")
+  if os.path.isfile("asp_py_lextab.pyc")   : os.remove("asp_py_lextab.pyc")
+  if os.path.isfile("asp_py_parsetab.py")  : os.remove("asp_py_parsetab.py")
+  if os.path.isfile("asp_py_parsetab.pyc") : os.remove("asp_py_parsetab.pyc") 
+
+
